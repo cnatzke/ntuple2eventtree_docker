@@ -1,4 +1,3 @@
-#----------------------------------------------------------
 # Author: C. Natzke
 # Creation Date: July 2022
 # Update:
@@ -50,19 +49,26 @@ RUN sed -ie '$s/^.//' ./GRSISort/.grsirc
 #-------------------------------------------------------------------------------
 # CommandLinesTools Build
 #-------------------------------------------------------------------------------
-#RUN git clone https://github.com/GRIFFINCollaboration/CommandLineInterface.git && \
-#    cd CommandLineInterface && \
-#    mkdir build && cd build && \
-#    source /software/root/bin/thisroot.sh &&\
-#    cmake .. && make install
-#
-#
-## setting proper environment variables
-#ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:~/lib
+WORKDIR /root
+
+RUN git clone https://github.com/GRIFFINCollaboration/CommandLineInterface.git && \
+    cd CommandLineInterface && \
+    mkdir build && cd build && \
+    source /software/root/bin/thisroot.sh &&\
+    source /software/GRSISort/thisgrsi.sh &&\
+    cmake .. && make install
+
+
+# setting proper environment variables
+ENV LD_LIBRARY_PATH /root/lib:/root/CommandLineInterface
 
 #-------------------------------------------------------------------------------
 # Ntuple2EventTree Build
 #-------------------------------------------------------------------------------
-#RUN git clone https://github.com/GRIFFINCollaboration/NTuple2EventTree.git && \
-#cd NTuple2EventTree && source /software/root/bin/thisroot.sh &&\
-#make 
+WORKDIR /software
+
+RUN git clone https://github.com/GRIFFINCollaboration/NTuple2EventTree.git &&\
+    cd NTuple2EventTree &&\
+    source /software/root/bin/thisroot.sh &&\
+    source /software/GRSISort/thisgrsi.sh &&\
+    make 
