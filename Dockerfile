@@ -37,13 +37,15 @@ RUN git clone https://github.com/GRIFFINCollaboration/GRSISort.git && \
     source /software/root/bin/thisroot.sh &&\
     cd GRSISort && make 
 
-#RUN cd GRSISort && \
-#    git clone https://github.com/GRIFFINCollaboration/GRSIData.git && \
-#    cd GRSIData && \
-#    source /software/root/bin/thisroot.sh &&\
-#    source /software/GRSISort/thisgrsi.sh &&\
-#    make
+RUN cd GRSISort && \
+    git clone https://github.com/GRIFFINCollaboration/GRSIData.git && \
+    cd GRSIData && \
+    source /software/root/bin/thisroot.sh &&\
+    source /software/GRSISort/thisgrsi.sh &&\
+    make
 
+# remove comment character in .grsirc
+RUN sed -ie '$s/^.//' ./GRSISort/.grsirc
 
 #-------------------------------------------------------------------------------
 # CommandLinesTools Build
