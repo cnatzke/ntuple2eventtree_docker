@@ -67,8 +67,7 @@ ENV LD_LIBRARY_PATH /software/CommandLineInterface/lib:/software/CommandLineInte
 #-------------------------------------------------------------------------------
 WORKDIR /software
 
-RUN git clone https://github.com/GRIFFINCollaboration/NTuple2EventTree.git &&\
-    cd NTuple2EventTree
+RUN git clone https://github.com/GRIFFINCollaboration/NTuple2EventTree.git
 
 COPY Makefile /software/NTuple2EventTree
 
