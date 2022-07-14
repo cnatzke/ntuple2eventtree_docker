@@ -49,18 +49,18 @@ RUN sed -ie '$s/^.//' ./GRSISort/.grsirc
 #-------------------------------------------------------------------------------
 # CommandLinesTools Build
 #-------------------------------------------------------------------------------
-WORKDIR /root
+WORKDIR /software
 
 RUN git clone https://github.com/GRIFFINCollaboration/CommandLineInterface.git && \
     cd CommandLineInterface && \
     mkdir build && cd build && \
     source /software/root/bin/thisroot.sh &&\
     source /software/GRSISort/thisgrsi.sh &&\
-    cmake .. && make install
-
+    cmake -DCMAKE_INSTALL_PREFIX=/software/CommandLineInterface .. &&\
+    make install
 
 # setting proper environment variables
-ENV LD_LIBRARY_PATH /root/lib:/root/CommandLineInterface
+ENV LD_LIBRARY_PATH /software/CommandLineInterface/lib:/software/CommandLineInterface
 
 #-------------------------------------------------------------------------------
 # Ntuple2EventTree Build
@@ -68,7 +68,11 @@ ENV LD_LIBRARY_PATH /root/lib:/root/CommandLineInterface
 WORKDIR /software
 
 RUN git clone https://github.com/GRIFFINCollaboration/NTuple2EventTree.git &&\
-    cd NTuple2EventTree &&\
-    source /software/root/bin/thisroot.sh &&\
+    cd NTuple2EventTree
+
+COPY Makefile /software/NTuple2EventTree
+
+RUN source /software/root/bin/thisroot.sh &&\
     source /software/GRSISort/thisgrsi.sh &&\
+    cd NTuple2EventTree &&\
     make 

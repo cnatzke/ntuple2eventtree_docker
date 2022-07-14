@@ -16,5 +16,5 @@ docker run -it --rm=true cnatzke/ntuple2eventtree_2photon:latest
 To run similar to the OSG implementation (recommended)
 ```
 docker run --user $(id -u):$(id -g) --rm=true -it -v $(pwd):/scratch -w
-/scratch cnatzke/ntuple2eventtree:latest /bin/bash 
+/scratch cnatzke/ntuple2eventtree_2photon:latest /bin/bash 
 ```
