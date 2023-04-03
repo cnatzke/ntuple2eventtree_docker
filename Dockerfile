@@ -75,3 +75,18 @@ RUN source /software/root/bin/thisroot.sh &&\
     source /software/GRSISort/thisgrsi.sh &&\
     cd NTuple2EventTree &&\
     make 
+
+#-------------------------------------------------------------------------------
+# SortAnalysisTree Build
+#-------------------------------------------------------------------------------
+WORKDIR /software
+
+RUN pwd
+RUN git clone https://github.com/cnatzke/sort-analysis-trees.git && \
+    source /software/root/bin/thisroot.sh && \
+    source /software/GRSISort/thisgrsi.sh && \
+    cd sort-analysis-trees && \
+    git checkout osg-deployment && \
+    mkdir build && cd build && \
+    cmake ../ && \
+    make

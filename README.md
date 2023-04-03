@@ -5,6 +5,7 @@ This is a containerized version of the GRIFFIN collaboration _NTuple2EventTree_ 
 To build the docker image, run the below command:
 ```
 docker build --tag <tag> .
+docker build --tag cnatzke/ntuple2eventtree_2photon:latest .
 ```
 in the directory containing the files `Dockerfile`
 
